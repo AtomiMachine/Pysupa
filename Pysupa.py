@@ -19,9 +19,11 @@ cap_filepath = filedialog.askopenfilename(filetype = filetype, initialdir = path
 
 model = whisper.load_model("base")
 result = model.transcribe(cap_filepath)
-file_object = open("audio_to_textfile","mode")
+# file_object = open("audio_to_textfile","base")
 
-
+print(result["text"])
 
 # @app.route('./')
+
+
 
