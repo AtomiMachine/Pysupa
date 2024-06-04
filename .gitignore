@@ -1,4 +1,4 @@
 # 特定のファイルを無視
-./build/*
-./dist/*
+build/Pysupa/*
+dist/*
 # 特定のディレクトリを無視
