@@ -13,16 +13,27 @@ import whisper
 # -----------
 # import 
 # -----------
-app = Flask(__name__)
+
 
 def recoded_serect():
   filetype = [("Audiofile",".mp3 .wav")]
   path = os.path.abspath(os.path.dirname(__file__))
   # cap_filepath = filedialog.askopenfilename(filetype = filetype, initialdir = path)
   cap_filepath = filedialog.askopenfilename(filetype = filetype, initialdir = path)
-  #model = whisper.load_model("base")
-  #result = model.transcribe(cap_filepath)
-  # file_object = open("audio_to_textfile","base")
+  model = whisper.load_model("base")
+
+  # with open("audio_to_textfile.txt", "w") as file_object:
+  #       result = model.transcribe(cap_filepath)
+  #       file_object.write(result["text"])
+
+  file_object = open("audio_to_textfile","base")
+  result = model.transcribe(cap_filepath)
+  print(result["text"])
+
+
+def real_time():
+  sampring_reat=441000
+  chunk_size = 1024
 
 #rootウィンドウの設定
 root = tk.Tk()
@@ -51,6 +62,7 @@ root.mainloop()
 
 
 
-#print(result["text"])
+
+
 
 # @app.route('./')
