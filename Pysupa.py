@@ -30,7 +30,7 @@ def recoded_serect():
   result = model.transcribe(cap_filepath)
   print(result["text"])
 
-
+# サンプリングレートなど
 def real_time():
   sampring_reat=441000
   chunk_size = 1024
