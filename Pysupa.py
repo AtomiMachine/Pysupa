@@ -28,7 +28,10 @@ def recoded_serect():
 
   file_object = open("audio_to_textfile","base")
   result = model.transcribe(cap_filepath)
-  print(result["text"])
+  newtextfile = input("voice to text")
+  with open(newtextfile , "w") as file:
+    file.write(result)
+  
 
 # サンプリングレートなど
 def real_time():
