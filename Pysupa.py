@@ -31,7 +31,7 @@ def recoded_serect():
   newtextfile = input("voice to text")
   with open(newtextfile , "w") as file:
     file.write(result)
-  
+    
 
 # サンプリングレートなど
 def real_time():
