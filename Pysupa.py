@@ -9,7 +9,12 @@ from tkinter import ttk
 from tkinter import filedialog
 import os
 import whisper
+import numpy
 
+
+
+# in Pysupafolder
+from Audio_trans import *
 # -----------
 # import 
 # -----------
@@ -26,11 +31,11 @@ def recoded_serect():
   #       result = model.transcribe(cap_filepath)
   #       file_object.write(result["text"])
 
-  file_object = open("audio_to_textfile","base")
+  # file_object = open("audio_to_textfile","base")
   result = model.transcribe(cap_filepath)
-  newtextfile = input("voice to text")
-  with open(newtextfile , "w") as file:
+  with open('test.txt',"w") as file:
     file.write(result)
+    
     
 
 # サンプリングレートなど
