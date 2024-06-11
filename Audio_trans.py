@@ -5,6 +5,8 @@ import asyncio
 import queue
 from concurrent.futures import ThreadPoolExecutor
 
+from transfromers import AutoModelForSpeechSeq2Seq, AutoProcessor, pipeline
+
 import numpy as np
 import sounddevice as sd
 import time
@@ -56,6 +58,39 @@ def transcribe_audio(q,pipe,output_buff,max_buffer_time, max_buffer_size):
 
   while running_status:
     try:
-      audio_data = q.get(timeout=1)  #timeout = キューから錯書する秒数を決めている
+      audio_data = q.get(timeout=1)  #timeout = キューから取得する秒数を決めている
     except queue.Empty:
       continue
+    
+    result = pipe(audio_data)
+    text = result("text")
+    buffer_content += text + " "
+    current_time = time.time()
+
+    if (current_time -last_output_time > max_buffer_time) or (len(buffer_content) >= max_buffer_size):
+      output_buff.put(buffer_content.strip())
+      buffer_content = ""
+      last_output_time = current_time
+    del audio_data
+
+def output_transcription(output_buffer, filename):
+    global running
+    while running:
+        try:
+            text = output_buffer.get(timeout=1)  # 1秒間待ってからキューから取得
+        except queue.Empty:
+            continue
+
+        with open(filename, "a") as file:
+            file.write(text + "\n")
+
+def main():
+    global running
+    # モデルとプロセッサの設定
+    device = "cuda:0" if torch.cuda.is_available() else "cpu"
+    torch_dtype = torch.float16 if torch.cuda.is_available() else torch.float32
+    model_id = "distil-whisper/distil-small.en"
+
+    model = AutoModelForSpeechSeq2Seq.from_pretrained(model_id, torch_dtype=torch_dtype, low_cpu_mem_usage=True, use_safetensors=True)
+    model.to(device)
+    processor = AutoProcessor.from_pretrained(model_id)
