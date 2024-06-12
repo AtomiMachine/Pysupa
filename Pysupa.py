@@ -9,7 +9,6 @@ from tkinter import ttk
 from tkinter import filedialog
 import os
 import whisper
-import numpy
 
 
 
