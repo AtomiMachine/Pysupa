@@ -32,10 +32,10 @@ def recoded_serect():
   #       file_object.write(result["text"])
 
   # file_object = open("audio_to_textfile","base")
-  result = model.transcribe(cap_filepath)
-  result_text = result['text']
+  result = model.transcribe(cap_filepath)['text']
+  # result_text = result['text']
   with open('test.txt',"w",encoding='utf=8') as file:
-    file.write(str(result_text))
+    file.write(str(result))
     
     
 
