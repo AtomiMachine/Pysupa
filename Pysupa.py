@@ -14,7 +14,7 @@ import numpy
 
 
 # in Pysupafolder
-from Audio_trans import *
+# from Audio_trans import *
 # -----------
 # import 
 # -----------
@@ -33,8 +33,9 @@ def recoded_serect():
 
   # file_object = open("audio_to_textfile","base")
   result = model.transcribe(cap_filepath)
-  with open('test.txt',"w") as file:
-    file.write(result)
+  result_text = result['text']
+  with open('test.txt',"w",encoding='utf=8') as file:
+    file.write(str(result_text))
     
     
 
