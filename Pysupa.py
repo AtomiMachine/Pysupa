@@ -20,12 +20,13 @@ import numpy
 # -----------
 
 
+
 def recoded_serect():
   filetype = [("Audiofile",".mp3 .wav")]
   path = os.path.abspath(os.path.dirname(__file__))
   # cap_filepath = filedialog.askopenfilename(filetype = filetype, initialdir = path)
   cap_filepath = filedialog.askopenfilename(filetype = filetype, initialdir = path)
-  model = whisper.load_model("base")
+  model = whisper.load_model("small")
 
   # with open("audio_to_textfile.txt", "w") as file_object:
   #       result = model.transcribe(cap_filepath)
