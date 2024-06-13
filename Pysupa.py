@@ -9,9 +9,8 @@ from tkinter import ttk
 from tkinter import filedialog
 import os
 import whisper
-import numpy
 
-
+from Audio_trans import *
 
 # in Pysupafolder
 # from Audio_trans import *
@@ -19,13 +18,12 @@ import numpy
 # import 
 # -----------
 
-
 def recoded_serect():
   filetype = [("Audiofile",".mp3 .wav")]
   path = os.path.abspath(os.path.dirname(__file__))
   # cap_filepath = filedialog.askopenfilename(filetype = filetype, initialdir = path)
   cap_filepath = filedialog.askopenfilename(filetype = filetype, initialdir = path)
-  model = whisper.load_model("base")
+  model = whisper.load_model("small")
 
   # with open("audio_to_textfile.txt", "w") as file_object:
   #       result = model.transcribe(cap_filepath)
@@ -36,9 +34,10 @@ def recoded_serect():
   # result_text = result['text']
   with open('test.txt',"w",encoding='utf=8') as file:
     file.write(str(result))
-    
-    
 
+def real():
+  Audio(5)
+  
 # サンプリングレートなど
 def real_time():
   sampring_reat=441000
@@ -59,8 +58,7 @@ recorded_data_text = tk.StringVar(frame)
 real_timebutton_text.set("リアルタイム出力")
 recorded_data_text.set("録音済みデータ")
 
-
-real_timebutton = tk.Button(frame,textvariable = real_timebutton_text, )
+real_timebutton = tk.Button(frame,textvariable = real_timebutton_text, command = real)
 recorded_button = tk.Button(frame,textvariable = recorded_data_text, command = recoded_serect)
 #配置
 real_timebutton.pack()
@@ -68,10 +66,5 @@ recorded_button.pack()
 
 root.attributes("-topmost", True)
 root.mainloop()
-
-
-
-
-
 
 # @app.route('./')
