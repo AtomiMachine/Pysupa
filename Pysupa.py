@@ -10,6 +10,8 @@ from tkinter import filedialog
 import os
 import whisper
 
+from Audio_trans import *
+
 # in Pysupafolder
 # from Audio_trans import *
 # -----------
@@ -32,6 +34,9 @@ def recoded_serect():
   # result_text = result['text']
   with open('test.txt',"w",encoding='utf=8') as file:
     file.write(str(result))
+
+def real():
+  Audio(5)
   
 # サンプリングレートなど
 def real_time():
@@ -53,7 +58,7 @@ recorded_data_text = tk.StringVar(frame)
 real_timebutton_text.set("リアルタイム出力")
 recorded_data_text.set("録音済みデータ")
 
-real_timebutton = tk.Button(frame,textvariable = real_timebutton_text, )
+real_timebutton = tk.Button(frame,textvariable = real_timebutton_text, command = real)
 recorded_button = tk.Button(frame,textvariable = recorded_data_text, command = recoded_serect)
 #配置
 real_timebutton.pack()
