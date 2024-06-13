@@ -8,12 +8,13 @@ def Audio(rectime):
   fs = 48000 #サンプリング周波数
   # f0 = 440 #周波数
   rectime = 3 #再生時間
-  sd.rec(int(rectime * fs),fs,channels=1)
+  audio_data = sd.rec(int(rectime * fs),fs,channels=1)
   # t = np.linspace(0, rectime, rectime * fs, endpoint=False)
   # x = np.sin(2*np.pi*f0*t)
   # sd.play(x, fs)
   sd.wait()  
-  return sd
+
+  return audio_data
 
 # device_list = sd.query_devices()
 # print(device_list)
